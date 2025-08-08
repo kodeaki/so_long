@@ -37,9 +37,11 @@ $(NAME): $(OBJS) $(HEADER)
 	$(COMPILE) $(OBJS) $(LIBFT) $(MLX) -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz -o $(NAME)
 
 clean:
+	make clean -C libft -s 
 	rm -rf $(OBJ_PATH)
 
 fclean: clean
+	make fclean -C libft -s
 	rm -rf $(NAME)
 
 re: fclean all
