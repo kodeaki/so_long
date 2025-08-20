@@ -19,7 +19,7 @@ SRCS = $(addprefix src/, $(SRC))
 OBJ = $(SRC:.c=.o)
 OBJS = $(addprefix obj/, $(OBJ))
 
-all: $(OBJ_PATH) $(LIBFT) $(NAME)
+all: $(OBJ_PATH) $(LIBFT) $(MLX) $(NAME)
 
 $(OBJ_PATH):
 	mkdir $(OBJ_PATH)
@@ -34,8 +34,8 @@ $(MLX):
 	make -C minilibx-linux -s
 
 $(NAME): $(OBJS) $(HEADER)
-	$(COMPILE) $(OBJS) $(LIBFT) $(MLX) -Lminilibx_linux -L/usr/lib -Iminilibx_linux -lXext -lX11 -lm -lz -o $(NAME)
-
+	$(COMPILE) $(OBJS) $(LIBFT) $(MLX) -lXext -lX11 -o $(NAME) 
+#-L/usr/lib -Iminilibx_linux -lz  -lm -Lminilibx_linux
 clean:
 	make clean -C libft -s 
 	rm -rf $(OBJ_PATH)
