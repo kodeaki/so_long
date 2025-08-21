@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:19:20 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/19 15:28:01 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/21 12:43:30 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	main(int ac, char **av)
 
 	mlx_loop(data.mlx_connection);
 
-	mlx_put_image_to_window(data.mlx_connection, data.mlx_window, );
+	mlx_put_image_to_window(data.mlx_connection, data.mlx_window, "", 200, 300);
 	
 	mlx_destroy_window(data.mlx_connection, data.mlx_window);
 	mlx_destroy_display(data.mlx_connection);
