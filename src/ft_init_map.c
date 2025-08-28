@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:10:06 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/28 22:21:22 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:52:00 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,9 @@ static char	*ft_append_line_to_map(char *new_map, char *line, t_game *game)
 {
 	char	*result;
 
-	result = malloc(ft_strlen(new_map) + ft_strlen(line) + 1);
+	result = ft_strjoin(new_map, line);
 	if (result == NULL)
 		ft_err_msg_exit("Error\nMalloc failure", game);
-	ft_strlcpy(result, new_map, ft_strlen(new_map) + 1);
-	ft_strlcat(result, line, ft_strlen(new_map) + ft_strlen(line) + 1);
 	free(new_map);
 	return (result);
 }
