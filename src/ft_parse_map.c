@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/28 22:42:21 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:25:43 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	ft_count_parameters(t_game *game)
 			if (game->map.grid[y][x] == PLAYER)
 			{
 				game->map.player_count++;
-				game->map.player_position_x = 1;
-				game->map.player_position_y = 1;
+				game->map.player_position_x = x;
+				game->map.player_position_y = y;
 			}
 			else if (game->map.grid[y][x] == COINS)
 				game->map.coin_count++;

@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:16:26 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/28 22:21:42 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/28 23:53:32 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ static t_image	ft_new_sprite(void *mlx, char *path, t_game *game)
 	if (sprite.xpm_ptr == NULL)
 	{
 		ft_err_msg_exit("Error\nSprite not found.\n", game);
-		exit(1);
 	}
 	return (sprite);
 }
