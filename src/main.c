@@ -6,50 +6,25 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:19:20 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/21 12:43:30 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/28 20:25:05 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../header/libsolong.h"
-
-int	handle_input(int keysym, t_so_long *data)
-{
-	if (keysym == XK_Escape)
-	{
-		ft_printf("key %d (ESC) was pressed. Exiting...\n", keysym);
-		mlx_destroy_window(data->mlx_connection, data->mlx_window);
-		mlx_destroy_display(data->mlx_connection);
-		free(data->mlx_connection);
-		exit(1);
-	}
-	ft_printf("pressed the %d key\n\n", keysym);
-	return (0);
-}
+#include "../libsolong.h"
 
 int	main(int ac, char **av)
 {
-	t_so_long	data;
+	t_game	game;
 
-	(void)ac;
-	(void)av;
-	data.mlx_connection = mlx_init();
-	if (data.mlx_connection == NULL)
-		return (1);
-	data.mlx_window = mlx_new_window(
-			data.mlx_connection, WIDTH, HEIGHT, "so_long");
-	if (data.mlx_window == NULL)
-	{
-		mlx_destroy_display(data.mlx_connection);
-		free(data.mlx_connection);
-		return (1);
-	}
-	mlx_key_hook(data.mlx_window, handle_input, &data);
-
-	mlx_loop(data.mlx_connection);
-
-	mlx_put_image_to_window(data.mlx_connection, data.mlx_window, "", 200, 300);
-	
-	mlx_destroy_window(data.mlx_connection, data.mlx_window);
-	mlx_destroy_display(data.mlx_connection);
-	free(data.mlx_connection);
+	ft_memset(&game, 0, sizeof(game));
+	ft_validate_args(ac, av, &game);
+	ft_init_map(&game, av[1]);
+	ft_parse_map(&game);
+	ft_init_mlx(&game);
+	ft_init_sprites(&game);
+	mlx_hook(game.window, KeyPress, KeyPressMask, ft_handle_input, &game);
+	mlx_hook(game.window, DestroyNotify, ButtonPressMask, ft_close_game, &game);
+	mlx_hook(game.window, Expose, ExposureMask, ft_render_map, &game);
+	mlx_loop(game.mlx);
+	ft_free_all(&game);
 }

@@ -60,3 +60,5 @@ so_long
 #project obj file folder
 /obj
 
+*tester*
+minilibx-linux

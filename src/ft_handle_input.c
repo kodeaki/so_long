@@ -1,0 +1,101 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_handle_input.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/08/26 16:45:28 by tpirinen          #+#    #+#             */
+/*   Updated: 2025/08/28 20:36:28 by tpirinen         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../libsolong.h"
+
+int			ft_handle_input(int keysym, t_game *game);
+int			ft_close_game(t_game *game);
+static void	ft_move_player(t_game *game, int y_new, int x_new, int orientation);
+static int	ft_win(t_game *game);
+
+/**
+ * Handles keyboard input events for the game window.
+ *
+ * @param keysym The key symbol (keycode) of the pressed key provided by MLX.
+ * @param game   Pointer to the t_game struct.
+ *
+ * If the Escape key is pressed, this function will free all allocated memory
+ * and exit the program. For any other key, it prints the keycode to stdout.
+ *
+ * @return Returns 0 unless ESC is pressed, in which case exits.
+ */
+int	ft_handle_input(int keysym, t_game *game)
+{
+	if (keysym == XK_w)
+		ft_move_player(game,
+			game->map.player_position_y - 1, game->map.player_position_x,
+			game->player_orientation);
+	if (keysym == XK_a)
+		ft_move_player(game,
+			game->map.player_position_y, game->map.player_position_x - 1,
+			LEFT);
+	if (keysym == XK_s)
+		ft_move_player(game,
+			game->map.player_position_y + 1, game->map.player_position_x,
+			game->player_orientation);
+	if (keysym == XK_d)
+		ft_move_player(game,
+			game->map.player_position_y, game->map.player_position_x + 1,
+			RIGHT);
+	if (keysym == XK_Escape)
+		ft_close_game(game);
+	return (0);
+}
+
+static void	ft_move_player(t_game *game, int y_new, int x_new, int orientation)
+{
+	int	y_before;
+	int	x_before;
+
+	game->player_orientation = orientation;
+	y_before = game->map.player_position_y;
+	x_before = game->map.player_position_x;
+	if (game->map.grid[y_new][x_new] == EXIT && game->map.coin_count == 0)
+		ft_win(game);
+	else if ((game->map.grid[y_new][x_new] == FLOOR)
+		|| (game->map.grid[y_new][x_new] == COINS))
+	{
+		game->movement_count++;
+		ft_printf("Movement count: %d\n\n", game->movement_count);
+		game->map.grid[y_before][x_before] = FLOOR;
+		if (game->map.grid[y_new][x_new] == COINS)
+			game->map.coin_count--;
+		game->map.player_position_x = x_new;
+		game->map.player_position_y = y_new;
+		game->map.grid[y_new][x_new] = PLAYER;
+		ft_render_map(game);
+	}
+}
+
+int	ft_close_game(t_game *game)
+{
+	ft_printf("Esc was pressed. Exiting...\n");
+	ft_free_all(game);
+	exit(0);
+}
+
+static int	ft_win(t_game *game)
+{
+	ft_printf("\
+██████████████████████████████████████████████████████████████████\n\
+██                                                              ██\n\
+██  ███  ███  ██████  ██    ██     ██      ██ ██ ██    ██   ██  ██\n\
+██   ██  ██  ██    ██ ██    ██     ██      ██ ██ ███   ██   ██  ██\n\
+██    ████   █      █ ██    ██     ██  ██  ██ ██ ██ ██ ██   ██  ██\n\
+██     ██    ██    ██ ██    ██     ██ ████ ██ ██ ██  ████       ██\n\
+██     ██     ██████    ████        ███  ███  ██ ██   ███   ██  ██\n\
+██                                                              ██\n\
+██████████████████████████████████████████████████████████████████\n\n\
+Total movement count: %d\n\n", ++game->movement_count);
+	ft_free_all(game);
+	exit(0);
+}
