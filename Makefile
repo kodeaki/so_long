@@ -44,7 +44,7 @@ SRC_BONUS		=	main_bonus.c\
 					ft_handle_input_bonus.c\
 					ft_render_game_bonus.c\
 					ft_frees_bonus.c\
-					ft_err_msg_exit_bonus.c
+					ft_err_msg_exit_bonus.c\
 					ft_print_mvmnt_bonus.c
 
 SRCS_BONUS		=	$(addprefix $(SRC_DIR_BONUS), $(SRC_BONUS))
