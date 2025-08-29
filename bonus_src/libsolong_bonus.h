@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 15:56:33 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/29 18:22:48 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # include <X11/keysym.h> // for keysym
 
-# include <X11/X.h> // i don't know why??????????????????????????????????????????
+# include <X11/X.h> // for X11 event and mask definitions
 
 # define IMG_HEIGHT	32
 # define IMG_WIDTH	32
