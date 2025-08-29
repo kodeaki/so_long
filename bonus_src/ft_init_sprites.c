@@ -6,11 +6,11 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:16:26 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 13:46:30 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/29 14:16:53 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 static t_image	ft_new_sprite(void *mlx, char *path, t_game *game);
 

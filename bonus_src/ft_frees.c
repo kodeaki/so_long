@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 void		ft_free_all(t_game *game);
 static void	ft_destroy_images(t_game *game);

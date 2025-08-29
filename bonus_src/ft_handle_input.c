@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 int			ft_handle_input(int keysym, t_game *game);
 int			ft_close_game(t_game *game);

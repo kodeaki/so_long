@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 int	main(int ac, char **av)
 {

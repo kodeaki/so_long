@@ -6,11 +6,11 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:40:10 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 13:45:51 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/29 14:16:39 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 /**
  * Frees all memory, writes the given error message, exits.

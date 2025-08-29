@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libsolong.h                                        :+:      :+:    :+:   */
+/*   libsolong_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/28 20:04:45 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/29 15:56:33 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBSOLONG_H
-# define LIBSOLONG_H
+#ifndef LIBSOLONG_BONUS_H
+# define LIBSOLONG_BONUS_H
 
-# include "libraries/libft/libft.h" // for various utility functions I've made.
-# include "libraries/minilibx-linux/mlx.h" // for various mlx functions used.
+# include "../libraries/libft/libft.h" // for various util functions I've made.
+# include "../libraries/minilibx-linux/mlx.h" // for various mlx functions used.
 
 # include <stdbool.h> // for true and false
 
@@ -22,10 +22,7 @@
 
 # include <X11/keysym.h> // for keysym
 
-# include <X11/X.h> // i don't know why???????????????????
-
-# define WINDOW_WIDTH 800
-# define WINDOW_HEIGHT 600
+# include <X11/X.h> // i don't know why??????????????????????????????????????????
 
 # define IMG_HEIGHT	32
 # define IMG_WIDTH	32
@@ -43,9 +40,13 @@
 # define COINS  		'C'
 # define PLAYER			'P'
 # define EXIT 		 	'E'
+# define FLOODFILL_MARK	'X'
 
 # define LEFT 			0
 # define RIGHT 			1
+
+# define RECTANGLE_WIDTH 90
+# define RECTANGLE_HEIGHT 20
 
 typedef struct s_image
 {
@@ -57,13 +58,14 @@ typedef struct s_image
 typedef struct s_map
 {
 	char	**grid;
+	char	**floodfill;
 	int		rows;
 	int		columns;
 	int		player_count;
 	int		coin_count;
 	int		exit_count;
-	int		player_position_x;
-	int		player_position_y;
+	int		player_column;
+	int		player_row;
 }	t_map;
 
 typedef struct s_game
@@ -73,15 +75,14 @@ typedef struct s_game
 	t_map	map;
 	int		player_orientation;
 	t_image	player_left;
-	t_image player_right;
-	t_image wall;
-	t_image floor;
-	t_image coins;
-	t_image exit_open;
-	t_image exit_closed;
+	t_image	player_right;
+	t_image	wall;
+	t_image	floor;
+	t_image	coins;
+	t_image	exit_open;
+	t_image	exit_closed;
 	int		movement_count;
 }	t_game;
-
 
 int		ft_handle_input(int keysym, t_game *game);
 
@@ -95,12 +96,18 @@ void	ft_init_map(t_game *game, char *map_filename);
 
 void	ft_parse_map(t_game *game);
 
-int		ft_render_map(t_game *game);
+void	ft_check_valid_path_to_win(t_game *game);
+
+int		ft_render_game(t_game *game);
 
 void	ft_free_all(t_game *game);
 
 int		ft_close_game(t_game *game);
 
 void	ft_err_msg_exit(char *msg, t_game *game);
+
+void	ft_print_movements(t_game *game);
+
+void	draw_rect(t_game *game, int x, int y, int color);
 
 #endif

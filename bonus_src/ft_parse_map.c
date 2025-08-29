@@ -6,11 +6,11 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 15:29:33 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/29 17:02:55 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libsolong.h"
+#include "libsolong_bonus.h"
 
 void		ft_parse_map(t_game *game);
 static void	ft_count_map_parameters(t_game *game);
@@ -82,14 +82,12 @@ static void	ft_verify_map_parameter_count(t_game *game)
 
 static void	ft_check_is_map_rectangular(t_game *game)
 {
-	size_t	column_length;
 	int		i;
 
-	column_length = ft_strlen(game->map.grid[0]);
 	i = 0;
-	while (game->map.grid[i])
+	while (i < game->map.rows)
 	{
-		if (column_length != ft_strlen(game->map.grid[i]))
+		if (game->map.columns != (int)ft_strlen(game->map.grid[i]))
 			ft_err_msg_exit("Map must be rectangular.", game);
 		i++;
 	}
@@ -101,10 +99,10 @@ static void	ft_check_is_map_enclosed(t_game *game)
 	int	x;
 
 	y = 0;
-	while (game->map.grid[y])
+	while (y < game->map.rows)
 	{
 		x = 0;
-		while (game->map.grid[y][x])
+		while (x < game->map.columns)
 		{
 			if ((y == 0 || y == game->map.rows - 1)
 				|| (x == 0 || x == game->map.columns - 1))
