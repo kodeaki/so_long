@@ -72,17 +72,11 @@ $(LIBFT):
 
 # Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
 v: all
-		touch mlx.supp
-		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./so_long ./maps/valid/ok2.ber
-		rm -rf mlx.supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./so_long ./maps/valid/ok2.ber
 
 # Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
 vb: bonus
-		touch mlx.supp
-		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) ./maps/valid/ok9.ber
-		rm -rf mlx.supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) ./maps/valid/ok9.ber
 
 clean:
 		@make clean -C $(LIBFT_PATH) -s
