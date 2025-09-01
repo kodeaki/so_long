@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 14:08:28 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 15:55:10 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,11 @@ static void	ft_verify_map_parameter_count(t_game *game);
 static void	ft_check_is_map_rectangular(t_game *game);
 static void	ft_check_is_map_enclosed(t_game *game);
 
+/** Parses the map to make sure it's valid before starting the game.
+ * Uses static functions from this file to check for basic invalidities
+ * and finishes with a floodfill algorithm to check if there's a
+ * valid path to win the game.
+ */
 void	ft_parse_map(t_game *game)
 {
 	ft_count_map_parameters(game);
@@ -27,6 +32,8 @@ void	ft_parse_map(t_game *game)
 	ft_check_valid_path_to_win(game);
 }
 
+/** Counts the parameters in the map.
+ */
 static void	ft_count_map_parameters(t_game *game)
 {
 	int	y;
@@ -56,6 +63,8 @@ static void	ft_count_map_parameters(t_game *game)
 	}
 }
 
+/** Checks that the map has a valid count of parameters.
+ */
 static void	ft_verify_map_parameter_count(t_game *game)
 {
 	if (game->map.player_count != 1
@@ -80,21 +89,27 @@ static void	ft_verify_map_parameter_count(t_game *game)
 	}
 }
 
+/** Checks that the map is rectangular by comparing every row's length
+ * with the length of the first row.
+ */
 static void	ft_check_is_map_rectangular(t_game *game)
 {
-	size_t	column_length;
+	size_t	row_length;
 	int		i;
 
-	column_length = ft_strlen(game->map.grid[0]);
+	row_length = ft_strlen(game->map.grid[0]);
 	i = 0;
 	while (game->map.grid[i])
 	{
-		if (column_length != ft_strlen(game->map.grid[i]))
+		if (row_length != ft_strlen(game->map.grid[i]))
 			ft_err_msg_exit("Map must be rectangular.", game);
 		i++;
 	}
 }
 
+/** Check that the map is fully enclosed by walls by iterating through the
+ * map and on the edges checking if the character is something other than '1'
+ */
 static void	ft_check_is_map_enclosed(t_game *game)
 {
 	int	y;

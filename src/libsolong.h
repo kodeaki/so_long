@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 13:37:34 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:39:18 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,21 +86,16 @@ int		ft_handle_input(int keysym, t_game *game);
 void	ft_validate_args(int ac, char **av, t_game *game);
 
 void	ft_init_mlx(t_game *game);
-
 void	ft_init_sprites(t_game *game);
 
 void	ft_init_map(t_game *game, char *map_filename);
-
 void	ft_parse_map(t_game *game);
-
 void	ft_check_valid_path_to_win(t_game *game);
 
 int		ft_render_game(t_game *game);
 
 void	ft_free_all(t_game *game);
-
 int		ft_close_game(t_game *game);
-
 void	ft_err_msg_exit(char *msg, t_game *game);
 
 #endif

@@ -66,16 +66,19 @@ $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
 $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 		$(COMPILE) $(OBJS_BONUS) $(LIBFT) -Llibraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME_BONUS)
 
+
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
-vlgr: all
+# Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
+v: all
 		touch mlx.supp
 		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./so_long ./maps/valid/ok2.ber
 		rm -rf mlx.supp
 
-vlgrb: bonus
+# Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
+vb: bonus
 		touch mlx.supp
 		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) ./maps/valid/ok9.ber

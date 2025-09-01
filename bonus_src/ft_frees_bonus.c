@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_frees.c                                         :+:      :+:    :+:   */
+/*   ft_frees_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:56:00 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 15:03:51 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:40:41 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,6 @@ static void	ft_free_maps(t_game *game);
 
 /** Cleans up all allocated memory, closes the window and closes the
  * connection to minilibx.
- * 
- * @param game Pointer to the game struct.
  */
 void	ft_free_all(t_game *game)
 {
@@ -34,6 +32,8 @@ void	ft_free_all(t_game *game)
 	}
 }
 
+/** Destroys the sprite images initiated with minilibx.
+ */
 static void	ft_destroy_images(t_game *game)
 {
 	if (game->player_left.xpm_ptr)
@@ -52,6 +52,8 @@ static void	ft_destroy_images(t_game *game)
 		mlx_destroy_image(game->mlx, game->exit_closed.xpm_ptr);
 }
 
+/** Frees both map arrays in the game struct
+ */
 static void	ft_free_maps(t_game *game)
 {
 	int	i;

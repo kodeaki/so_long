@@ -6,18 +6,20 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:49:19 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 18:18:41 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 16:34:07 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libsolong.h"
 
 int			ft_render_game(t_game *game);
-static void	ft_identify_sprite(t_game *game, int y, int x);
+static void	ft_identify_and_render_sprite(t_game *game, int y, int x);
 static void	ft_render_player_sprite(t_game *game, int y, int x);
-static void	ft_render_sprite(
-				t_game *game, t_image sprite, int line, int column);
+static void	ft_render_sprite(t_game *game, t_image sprite, int y, int x);
 
+/** Renders the game by looping through the map and rendering the sprite
+ * that matches that tile based on the game state.
+*/
 int	ft_render_game(t_game *game)
 {
 	int	x;
@@ -29,7 +31,7 @@ int	ft_render_game(t_game *game)
 		x = 0;
 		while (x < game->map.columns)
 		{
-			ft_identify_sprite(game, y, x);
+			ft_identify_and_render_sprite(game, y, x);
 			x++;
 		}
 		y++;
@@ -37,7 +39,10 @@ int	ft_render_game(t_game *game)
 	return (0);
 }
 
-static void	ft_identify_sprite(t_game *game, int y, int x)
+/** Identifies the sprite on the given coordinate and renders
+ * the appropriate sprite.
+ */
+static void	ft_identify_and_render_sprite(t_game *game, int y, int x)
 {
 	char	parameter;
 
@@ -61,6 +66,8 @@ static void	ft_identify_sprite(t_game *game, int y, int x)
 	}
 }
 
+/** Renders the correct player sprite based on the player orientation.
+ */
 static void	ft_render_player_sprite(t_game *game, int y, int x)
 {
 	if (game->player_orientation == LEFT)
@@ -69,6 +76,8 @@ static void	ft_render_player_sprite(t_game *game, int y, int x)
 		ft_render_sprite(game, game->player_right, y, x);
 }
 
+/** Uses a minilibx function to render the wanted sprite at the wanted position.
+*/
 static void	ft_render_sprite(t_game *game, t_image sprite, int y, int x)
 {
 	mlx_put_image_to_window (
