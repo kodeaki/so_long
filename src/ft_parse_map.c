@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 15:29:33 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 13:15:25 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static void	ft_verify_map_parameter_count(t_game *game)
 		|| game->map.exit_count != 1
 		|| game->map.coin_count == 0)
 	{
-		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Error", 1);
 		if (game->map.player_count != 1)
 			ft_putendl_fd("Invalid Map. "
-				"There must be one player, no more, no less.", 2);
+				"There must be one player, no more, no less.", 1);
 		if (game->map.exit_count != 1)
 		{
 			ft_putendl_fd("Invalid Map. "
-				"There must be one exit, no more, no less.", 2);
+				"There must be one exit, no more, no less.", 1);
 		}
 		if (game->map.coin_count == 0)
 		{
-			ft_putendl_fd("Invalid Map. Where the coins at?", 2);
+			ft_putendl_fd("Invalid Map. Where the coins at?", 1);
 		}
 		ft_free_all(game);
 		exit(1);

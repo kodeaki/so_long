@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 15:31:45 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 16:08:17 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/08/12 01:07:59 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct s_list
 	struct s_list	*next;
 }					t_list;
 
-/*		ascii		*/
+/*		Ascii		*/
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
 int		ft_isascii(int c);
@@ -40,7 +40,7 @@ int		ft_isprint(int c);
 int		ft_tolower(int c);
 int		ft_toupper(int c);
 
-/*		memory		*/
+/*		Memory		*/
 void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t nmemb, size_t size);
 void	*ft_memchr(const void *s, int c, size_t n);
@@ -49,9 +49,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n);
 void	*ft_memmove(void *dest, const void *src, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 
-/*		strings	*/
+/*		Strings	*/
 int		ft_atoi(const char *nptr);
-size_t	ft_count_words(char const *s, char c);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
@@ -69,11 +68,10 @@ char	*ft_strnstr(const char *big, const char *little, size_t len);
 char	*ft_strtrim(char const *s1, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 
-/*		int array */
-void	ft_int_arr_copy(int *dest, int *src, int size);
-
-/*		print functions	*/
-int		ft_printf(const char *s, ...);
+/*		Print functions	
+		In the libft project these were simple void functions but I modified
+		them to return the amount of characters printed or -1 for error
+		to be compatible with the ft_printf project.		*/
 ssize_t	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 ssize_t	ft_putnbr_fd(int n, int fd);
@@ -83,7 +81,7 @@ ssize_t	ft_putptr_fd(void *p, int fd);
 ssize_t	ft_putstr_fd(char *s, int fd);
 ssize_t	ft_putunbr_fd(unsigned int n, int fd);
 
-/*		linked lists	*/
+/*		Linked lists	*/
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
@@ -94,7 +92,21 @@ void	ft_lstclear(t_list **lst, void (*del)(void*));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-/*		file reading	*/
+// FUNCTIONS ADDED AFTER LIBFT COMPLETETION:
+/*		Errors		*/
+int		ft_error_msg(char *err_msg, int err_code);
+
+/*		Print functions	*/
+int		ft_printf(const char *s, ...);
+int		ft_fprintf(int fd, const char *s, ...);
+
+/*		Strings	*/
+size_t	ft_count_words(char const *s, char c);
+
+/*		File reading	*/
 char	*get_next_line(int fd);
+
+/*		Int array */
+void	ft_int_arr_copy(int *dest, int *src, int size);
 
 #endif

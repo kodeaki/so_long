@@ -55,10 +55,9 @@ dkms.conf
 *.dwo
 
 # project executable
-so_long
+*so_long*
 
 #project obj file folder
 /obj
 
-*tester*
 minilibx-linux

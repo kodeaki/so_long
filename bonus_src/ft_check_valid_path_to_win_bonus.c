@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 14:35:38 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 18:25:10 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:06:02 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	ft_check_valid_path_to_win(t_game *game)
 
 static void	ft_flood_fill(t_game *game, int row, int column)
 {
+	if (game->map.floodfill[row][column] == EXIT)
+	{
+		game->map.floodfill[row][column] = FLOODFILL_MARK;
+		return;
+	}
 	if (game->map.floodfill[row][column] == WALL
 	|| game->map.floodfill[row][column] == FLOODFILL_MARK)
 		return ;

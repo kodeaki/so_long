@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 18:22:48 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:09:10 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define LEFT 			0
 # define RIGHT 			1
 
-# define RECTANGLE_WIDTH 90
+# define RECTANGLE_WIDTH 95
 # define RECTANGLE_HEIGHT 20
 
 typedef struct s_image
@@ -107,7 +107,5 @@ int		ft_close_game(t_game *game);
 void	ft_err_msg_exit(char *msg, t_game *game);
 
 void	ft_print_movements(t_game *game);
-
-void	draw_rect(t_game *game, int x, int y, int color);
 
 #endif

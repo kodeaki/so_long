@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_parse_map.c                                     :+:      :+:    :+:   */
+/*   ft_parse_map_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 17:02:55 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:08:28 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,18 @@ static void	ft_verify_map_parameter_count(t_game *game)
 		|| game->map.exit_count != 1
 		|| game->map.coin_count == 0)
 	{
-		ft_putendl_fd("Error", 2);
+		ft_putendl_fd("Error", 1);
 		if (game->map.player_count != 1)
 			ft_putendl_fd("Invalid Map. "
-				"There must be one player, no more, no less.", 2);
+				"There must be one player, no more, no less.", 1);
 		if (game->map.exit_count != 1)
 		{
 			ft_putendl_fd("Invalid Map. "
-				"There must be one exit, no more, no less.", 2);
+				"There must be one exit, no more, no less.", 1);
 		}
 		if (game->map.coin_count == 0)
 		{
-			ft_putendl_fd("Invalid Map. Where the coins at?", 2);
+			ft_putendl_fd("Invalid Map. Where the coins at?", 1);
 		}
 		ft_free_all(game);
 		exit(1);
@@ -82,12 +82,14 @@ static void	ft_verify_map_parameter_count(t_game *game)
 
 static void	ft_check_is_map_rectangular(t_game *game)
 {
+	size_t	column_length;
 	int		i;
 
+	column_length = ft_strlen(game->map.grid[0]);
 	i = 0;
-	while (i < game->map.rows)
+	while (game->map.grid[i])
 	{
-		if (game->map.columns != (int)ft_strlen(game->map.grid[i]))
+		if (column_length != ft_strlen(game->map.grid[i]))
 			ft_err_msg_exit("Map must be rectangular.", game);
 		i++;
 	}
@@ -99,10 +101,10 @@ static void	ft_check_is_map_enclosed(t_game *game)
 	int	x;
 
 	y = 0;
-	while (y < game->map.rows)
+	while (game->map.grid[y])
 	{
 		x = 0;
-		while (x < game->map.columns)
+		while (game->map.grid[y][x])
 		{
 			if ((y == 0 || y == game->map.rows - 1)
 				|| (x == 0 || x == game->map.columns - 1))

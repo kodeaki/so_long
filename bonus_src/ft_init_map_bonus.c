@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_map.c                                      :+:      :+:    :+:   */
+/*   ft_init_map_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:10:06 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 17:02:19 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:07:41 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ft_init_map(t_game *game, char *map_filename)
 		ft_err_msg_exit("Couldn't open map file..?\n", game);
 	new_map = ft_strdup("");
 	line = get_next_line(map_fd);
+	if (line == NULL)
+		ft_err_msg_exit("Map file is empty", game);
 	while (line != NULL)
 	{
 		new_map = ft_append_line_to_map(new_map, line, game);

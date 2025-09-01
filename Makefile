@@ -1,16 +1,13 @@
 
-NAME		=	so_long
-HEADER		=	src/libsolong.h
 
 LIBFT_PATH	=	./libraries/libft/
 LIBFT		=	$(LIBFT_PATH)libft.a
-LIBFT_H		=	$(LIBFT_PATH)libft.h
-
 COMPILE 	=	cc -Wall -Wextra -Werror
 
+NAME		=	so_long
 SRC_DIR 	=	./src/
 OBJ_DIR 	=	./obj/
-
+HEADER		=	$(SRC_DIR)libsolong.h
 SRC			=	main.c\
 				ft_validate_args.c\
 				ft_init_map.c\
@@ -21,10 +18,8 @@ SRC			=	main.c\
 				ft_handle_input.c\
 				ft_render_game.c\
 				ft_frees.c\
-				ft_err_msg_exit.c\
-
+				ft_err_msg_exit.c
 SRCS		=	$(addprefix $(SRC_DIR), $(SRC))
-
 OBJ			=	$(SRC:.c=.o)
 OBJS		=	$(addprefix $(OBJ_DIR), $(OBJ))
 
@@ -33,7 +28,6 @@ NAME_BONUS		=	bonus_so_long
 SRC_DIR_BONUS	=	bonus_src/
 OBJ_DIR_BONUS	=	bonus_obj/
 HEADER_BONUS	=	$(SRC_DIR_BONUS)libsolong_bonus.h
-
 SRC_BONUS		=	main_bonus.c\
 					ft_validate_args_bonus.c\
 					ft_init_map_bonus.c\
@@ -46,33 +40,31 @@ SRC_BONUS		=	main_bonus.c\
 					ft_frees_bonus.c\
 					ft_err_msg_exit_bonus.c\
 					ft_print_mvmnt_bonus.c
-
 SRCS_BONUS		=	$(addprefix $(SRC_DIR_BONUS), $(SRC_BONUS))
-
 OBJ_BONUS		=	$(SRC_BONUS:.c=.o)
 OBJS_BONUS		=	$(addprefix $(OBJ_DIR_BONUS), $(OBJ_BONUS))
 
 all:	$(OBJ_DIR) $(LIBFT) $(NAME)
 
 $(OBJ_DIR):
-		mkdir $(OBJ_DIR)
+		@mkdir $(OBJ_DIR)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
-		$(COMPILE) -c $^ -o $@
+		@$(COMPILE) -c $^ -o $@
 
 $(NAME):$(OBJS) $(HEADER)
-		$(COMPILE) $(OBJS) $(LIBFT) -B libraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME)
+		$(COMPILE) $(OBJS) $(LIBFT) -Llibraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME)
 
 bonus:	$(OBJ_DIR_BONUS) $(LIBFT) $(NAME_BONUS)
 
 $(OBJ_DIR_BONUS):
-		mkdir $(OBJ_DIR_BONUS)
+		@mkdir $(OBJ_DIR_BONUS)
 
 $(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
-		$(COMPILE) -c $^ -o $@
+		@$(COMPILE) -c $^ -o $@
 
 $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
-		$(COMPILE) $(OBJS_BONUS) $(LIBFT) -B libraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME_BONUS)
+		$(COMPILE) $(OBJS_BONUS) $(LIBFT) -Llibraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME_BONUS)
 
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
@@ -80,26 +72,28 @@ $(LIBFT):
 vlgr: all
 		touch mlx.supp
 		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./so_long ./maps/valid/3valid.ber
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./so_long ./maps/valid/ok2.ber
 		rm -rf mlx.supp
 
 vlgrb: bonus
 		touch mlx.supp
 		printf '{\n   x11_writev\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) ./maps/valid/3valid.ber
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) ./maps/valid/ok9.ber
 		rm -rf mlx.supp
 
 clean:
-		make clean -C $(LIBFT_PATH) -s
-		rm -rf $(OBJ_DIR)
-		rm -rf $(OBJ_DIR_BONUS)
+		@make clean -C $(LIBFT_PATH) -s
+		@rm -rf $(OBJ_DIR)
+		@rm -rf $(OBJ_DIR_BONUS)
+		@echo "removed object files"
 
 fclean:
-		make fclean -C $(LIBFT_PATH) -s
-		rm -rf $(OBJ_DIR)
-		rm -rf $(OBJ_DIR_BONUS)
-		rm -rf $(NAME)
-		rm -rf $(NAME_BONUS)
+		@make fclean -C $(LIBFT_PATH) -s
+		@rm -rf $(OBJ_DIR)
+		@rm -rf $(OBJ_DIR_BONUS)
+		@rm -rf $(NAME)
+		@rm -rf $(NAME_BONUS)
+		@echo "removed object files and executables"
 
 re:		fclean all
 

@@ -8,6 +8,8 @@ CC = cc -Wall -Wextra -Werror
 SRC	=	ft_atoi.c			\
 		ft_bzero.c			\
 		ft_calloc.c			\
+		ft_error_msg.c		\
+		ft_fprintf.c		\
 		ft_int_arr_copy.c	\
 		ft_isalnum.c		\
 		ft_isalpha.c		\

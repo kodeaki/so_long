@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_err_msg_exit.c                                  :+:      :+:    :+:   */
+/*   ft_err_msg_exit_bonus.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 17:40:10 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 14:16:39 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/01 14:07:08 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 void	ft_err_msg_exit(char *err_msg, t_game *game)
 {
 	ft_free_all(game);
-	ft_putendl_fd("Error", 2);
-	ft_putendl_fd(err_msg, 2);
+	ft_fprintf(1, "Error\n%s\n", err_msg);
 	exit(1);
 }
