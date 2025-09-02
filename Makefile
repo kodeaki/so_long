@@ -70,7 +70,7 @@ $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
-MAP = ./maps/valid/ok10.ber
+MAP = ./maps/valid/ok13.ber
 # Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
 v: all
 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)

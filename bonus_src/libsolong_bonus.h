@@ -34,8 +34,8 @@
 # define WALL_XPM "sprites/brick_wall_cracked.xpm" // wall sprite
 // # define FLOOR_XPM "sprites/kitchentile.xpm" // floor sprite
 # define FLOOR_XPM "sprites/rocky_road.xpm" // floor sprite
-# define EXIT_OPEN_XPM "sprites/manypets.xpm" // exit sprite
-# define EXIT_CLOSED_XPM "sprites/nopets.xpm" // exit sprite
+# define EXIT_OPEN_XPM "sprites/hell.xpm" // exit sprite
+# define EXIT_CLOSED_XPM "sprites/hell_locked.xpm" // exit sprite
 
 # define WALL			'1'
 # define FLOOR 			'0'
@@ -46,9 +46,6 @@
 
 # define LEFT 			0
 # define RIGHT 			1
-
-# define RECTANGLE_WIDTH 100
-# define RECTANGLE_HEIGHT 20
 
 typedef struct s_image
 {

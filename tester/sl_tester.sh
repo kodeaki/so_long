@@ -15,8 +15,9 @@ WHITE='\033[0;97m'
 
 # -=-=-=-=-	CLRS -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- #
 
-make -C ../ bonus
-cp ../bonus_so_long ./so_long
+make -C ../ all bonus
+cp ../so_long ./
+cp ../bonus_so_long ./so_long	# Comment this out to test mandatory version
 
 C=1;
 

@@ -54,10 +54,10 @@ dkms.conf
 # debug information files
 *.dwo
 
+
 # project executable
 *so_long*
 
 #project obj file folder
 /obj
-
-minilibx-linux
+/bonus_obj

@@ -34,8 +34,8 @@
 // # define WALL_XPM "sprites/Brick_wall.xpm" // wall sprite
 # define WALL_XPM "sprites/brick_wall_cracked.xpm" // wall sprite
 # define FLOOR_XPM "sprites/rocky_road.xpm" // floor sprite
-# define EXIT_OPEN_XPM "sprites/manypets.xpm" // exit sprite
-# define EXIT_CLOSED_XPM "sprites/nopets.xpm" // exit sprite
+# define EXIT_OPEN_XPM "sprites/hell.xpm" // exit sprite
+# define EXIT_CLOSED_XPM "sprites/hell_locked.xpm" // exit sprite
 
 # define WALL			'1'
 # define FLOOR 			'0'
