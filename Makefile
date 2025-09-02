@@ -94,6 +94,9 @@ vb: bonus supp
 supp:
 	printf '{\n   writev_uninit_xcb\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
 
+mlx:
+	make -C libraries/minilibx
+
 clean:
 		@make clean -C $(LIBFT_PATH) -s
 		@rm -rf $(OBJ_DIR)
