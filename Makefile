@@ -70,14 +70,28 @@ $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
-MAP = ./maps/valid/ok13.ber
+MAP = ./maps/valid/ok9.ber
+
 # Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
-v: all
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)
+v: all supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME) $(MAP)
+# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)
+		rm mlx.supp
 
 # Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
-vb: bonus
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) $(MAP)
+vb: bonus supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) $(MAP)
+# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) $(MAP)
+		rm mlx.supp
+
+# Suppresses errors made in the minilibx library
+# writev_uninit_xcb :	is a name for the suppression, writev, uninit, and xcv describe the errors to suppress
+# Memcheck:Param :		Memcheck is valgrinds default tool for detecting memory errors, Param means the error is related to a function parameter
+# writev(vector[0]) :	writev is a syscall used to write data from multiple buffers, vector[0] means the first buffer passed to writev
+# 						this suppresses the uninitialized bytes error.
+# fun:writev :			This means that only errors that happen in the writev function are suppressed so any memory leaks etc. still get flagged
+supp:
+	printf '{\n   writev_uninit_xcb\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
 
 clean:
 		@make clean -C $(LIBFT_PATH) -s
