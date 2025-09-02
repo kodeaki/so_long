@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 17:19:20 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/08/29 15:14:42 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:28:26 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int ac, char **av)
 	ft_init_mlx(&game);
 	ft_init_sprites(&game);
 	mlx_hook(game.window, KeyPress, KeyPressMask, ft_handle_input, &game);
-	mlx_hook(game.window, DestroyNotify, ButtonPressMask, ft_close_game, &game);
+	mlx_hook(game.window, DestroyNotify, StructureNotifyMask, ft_close_game, &game);
 	mlx_hook(game.window, Expose, ExposureMask, ft_render_game, &game);
 	mlx_loop(game.mlx);
 	ft_free_all(&game);

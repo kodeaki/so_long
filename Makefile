@@ -49,8 +49,8 @@ all:	$(OBJ_DIR) $(LIBFT) $(NAME)
 $(OBJ_DIR):
 		@mkdir $(OBJ_DIR)
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-		@$(COMPILE) -c $^ -o $@
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c $(HEADER)
+		@$(COMPILE) -c $< -o $@
 
 $(NAME):$(OBJS) $(HEADER)
 		$(COMPILE) $(OBJS) $(LIBFT) -Llibraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME)
@@ -60,8 +60,8 @@ bonus:	$(OBJ_DIR_BONUS) $(LIBFT) $(NAME_BONUS)
 $(OBJ_DIR_BONUS):
 		@mkdir $(OBJ_DIR_BONUS)
 
-$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c
-		@$(COMPILE) -c $^ -o $@
+$(OBJ_DIR_BONUS)%.o: $(SRC_DIR_BONUS)%.c $(HEADER_BONUS)
+		@$(COMPILE) -c $< -o $@
 
 $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 		$(COMPILE) $(OBJS_BONUS) $(LIBFT) -Llibraries/minilibx-linux -lmlx -lXext -lX11 -o $(NAME_BONUS)
@@ -70,13 +70,14 @@ $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
+MAP = ./maps/valid/ok10.ber
 # Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
 v: all
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./so_long ./maps/valid/ok2.ber
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)
 
 # Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
 vb: bonus
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) ./maps/valid/ok9.ber
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) $(MAP)
 
 clean:
 		@make clean -C $(LIBFT_PATH) -s

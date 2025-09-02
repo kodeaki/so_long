@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 14:49:26 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/02 16:17:59 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,13 @@
 # define IMG_HEIGHT	32
 # define IMG_WIDTH	32
 
-# define CATLEFT_XPM "sprites/catleft.xpm" // player sprite
-# define CATRIGHT_XPM "sprites/catright.xpm" // player sprite
-# define MOUSE_XPM "sprites/kitchenmouse.xpm" // coins sprite
-# define WALL_XPM "sprites/wall.xpm" // wall sprite
-# define FLOOR_XPM "sprites/kitchentile.xpm" // floor sprite
+# define CATLEFT_XPM "sprites/cat_left.xpm" // player sprite
+# define CATRIGHT_XPM "sprites/cat_right.xpm" // player sprite
+# define MOUSE_XPM "sprites/mouse.xpm" // coins sprite
+// # define WALL_XPM "sprites/wall.xpm" // wall sprite
+# define WALL_XPM "sprites/brick_wall_cracked.xpm" // wall sprite
+// # define FLOOR_XPM "sprites/kitchentile.xpm" // floor sprite
+# define FLOOR_XPM "sprites/rocky_road.xpm" // floor sprite
 # define EXIT_OPEN_XPM "sprites/manypets.xpm" // exit sprite
 # define EXIT_CLOSED_XPM "sprites/nopets.xpm" // exit sprite
 
@@ -45,7 +47,7 @@
 # define LEFT 			0
 # define RIGHT 			1
 
-# define RECTANGLE_WIDTH 95
+# define RECTANGLE_WIDTH 100
 # define RECTANGLE_HEIGHT 20
 
 typedef struct s_image
