@@ -95,7 +95,7 @@ supp:
 	printf '{\n   writev_uninit_xcb\n   Memcheck:Param\n   writev(vector[0])\n   fun:writev\n}\n' > mlx.supp
 
 mlx:
-	make -C libraries/minilibx
+	make -C libraries/minilibx-linux
 
 clean:
 		@make clean -C $(LIBFT_PATH) -s
