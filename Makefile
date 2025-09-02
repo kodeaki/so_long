@@ -70,17 +70,18 @@ $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
-MAP = ./maps/valid/ok9.ber
+MAP_DIR = ./maps/valid/
+MAP ?= ok9
 
 # Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
 v: all supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME) $(MAP)
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME) $(MAP_DIR)$(MAP).ber
 # 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)
 		rm mlx.supp
 
 # Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
 vb: bonus supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) $(MAP)
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) $(MAP_DIR)$(MAP).ber
 # 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) $(MAP)
 		rm mlx.supp
 
