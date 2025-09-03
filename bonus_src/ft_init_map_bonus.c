@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:10:06 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 14:07:41 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:12:30 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,10 @@ void	ft_init_map(t_game *game, char *map_filename)
 	map_fd = open(map_filename, O_RDONLY);
 	if (map_fd == -1)
 		ft_err_msg_exit("Couldn't open map file..?\n", game);
-	new_map = ft_strdup("");
 	line = get_next_line(map_fd);
 	if (line == NULL)
 		ft_err_msg_exit("Map file is empty", game);
+	new_map = ft_strdup("");
 	while (line != NULL)
 	{
 		new_map = ft_append_line_to_map(new_map, line, game);
@@ -45,6 +45,7 @@ void	ft_init_map(t_game *game, char *map_filename)
 		game->map.rows++;
 		line = get_next_line(map_fd);
 	}
+	close(game->map_fd);
 	free(line);
 	empty_line_check(new_map, game);
 	game->map.grid = ft_split(new_map, '\n');

@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/26 18:56:00 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 14:40:41 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:12:26 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ void	ft_free_all(t_game *game)
 		mlx_destroy_display(game->mlx);
 		free(game->mlx);
 	}
+	if (game->map_fd)
+		close(game->map_fd);
 }
 
 /** Destroys the sprite images initiated with minilibx.

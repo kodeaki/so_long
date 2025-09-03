@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/02 16:17:59 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:14:06 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@
 # define CATLEFT_XPM "sprites/cat_left.xpm" // player sprite
 # define CATRIGHT_XPM "sprites/cat_right.xpm" // player sprite
 # define MOUSE_XPM "sprites/mouse.xpm" // coins sprite
-// # define WALL_XPM "sprites/wall.xpm" // wall sprite
 # define WALL_XPM "sprites/brick_wall_cracked.xpm" // wall sprite
-// # define FLOOR_XPM "sprites/kitchentile.xpm" // floor sprite
 # define FLOOR_XPM "sprites/rocky_road.xpm" // floor sprite
 # define EXIT_OPEN_XPM "sprites/hell.xpm" // exit sprite
 # define EXIT_CLOSED_XPM "sprites/hell_locked.xpm" // exit sprite
@@ -71,6 +69,7 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*window;
+	int		map_fd;
 	t_map	map;
 	int		player_orientation;
 	t_image	player_left;
@@ -88,21 +87,16 @@ int		ft_handle_input(int keysym, t_game *game);
 void	ft_validate_args(int ac, char **av, t_game *game);
 
 void	ft_init_mlx(t_game *game);
-
 void	ft_init_sprites(t_game *game);
 
 void	ft_init_map(t_game *game, char *map_filename);
-
 void	ft_parse_map(t_game *game);
-
 void	ft_check_valid_path_to_win(t_game *game);
 
 int		ft_render_game(t_game *game);
 
 void	ft_free_all(t_game *game);
-
 int		ft_close_game(t_game *game);
-
 void	ft_err_msg_exit(char *msg, t_game *game);
 
 void	ft_print_movements(t_game *game);

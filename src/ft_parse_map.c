@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 15:54:41 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:28:11 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ static void	ft_check_is_map_enclosed(t_game *game)
 		{
 			if ((y == 0 || y == game->map.rows - 1)
 				|| (x == 0 || x == game->map.columns - 1))
-				if (game->map.grid[y][x] != '1')
+				if (game->map.grid[y][x] != WALL)
 					ft_err_msg_exit("Map is not enclosed", game);
 			x++;
 		}

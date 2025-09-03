@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/06 18:44:52 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/02 16:29:22 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 17:36:26 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@
 # define CATLEFT_XPM "sprites/cat_left.xpm" // player sprite
 # define CATRIGHT_XPM "sprites/cat_right.xpm" // player sprite
 # define MOUSE_XPM "sprites/mouse.xpm" // coins sprite
-// # define WALL_XPM "sprites/wall.xpm" // wall sprite
-// # define WALL_XPM "sprites/Brick_wall.xpm" // wall sprite
 # define WALL_XPM "sprites/brick_wall_cracked.xpm" // wall sprite
 # define FLOOR_XPM "sprites/rocky_road.xpm" // floor sprite
 # define EXIT_OPEN_XPM "sprites/hell.xpm" // exit sprite
@@ -71,6 +69,7 @@ typedef struct s_game
 {
 	void	*mlx;
 	void	*window;
+	int		map_fd;
 	t_map	map;
 	int		player_orientation;
 	t_image	player_left;

@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/27 16:10:06 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 13:27:09 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 18:10:35 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,22 @@ void	ft_init_map(t_game *game, char *map_filename)
 {
 	char	*new_map;
 	char	*line;
-	int		map_fd;
 
-	map_fd = open(map_filename, O_RDONLY);
-	if (map_fd == -1)
+	game->map_fd = open(map_filename, O_RDONLY);
+	if (game->map_fd == -1)
 		ft_err_msg_exit("Couldn't open map file..?\n", game);
-	new_map = ft_strdup("");
-	line = get_next_line(map_fd);
+	line = get_next_line(game->map_fd);
 	if (line == NULL)
 		ft_err_msg_exit("Map file is empty", game);
+	new_map = ft_strdup("");
 	while (line != NULL)
 	{
 		new_map = ft_append_line_to_map(new_map, line, game);
 		free(line);
 		game->map.rows++;
-		line = get_next_line(map_fd);
+		line = get_next_line(game->map_fd);
 	}
+	close(game->map_fd);
 	free(line);
 	empty_line_check(new_map, game);
 	game->map.grid = ft_split(new_map, '\n');
@@ -64,7 +64,10 @@ static char	*ft_append_line_to_map(char *new_map, char *line, t_game *game)
 
 	result = ft_strjoin(new_map, line);
 	if (result == NULL)
+	{
+		free(new_map);
 		ft_err_msg_exit("Error\nMalloc failure", game);
+	}
 	free(new_map);
 	return (result);
 }

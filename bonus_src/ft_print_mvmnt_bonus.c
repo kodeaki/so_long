@@ -6,13 +6,13 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/29 13:32:51 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/02 23:58:20 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/03 14:48:08 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libsolong_bonus.h"
 
-/** Draws a white rectangle to the top left of the game window.
+/** Draws a rectangle to the top left of the game window.
  */
 static void	draw_rectangle(t_game *game, int x, int y, int color)
 {
@@ -43,7 +43,7 @@ static void	draw_rectangle(t_game *game, int x, int y, int color)
 	}
 }
 
-/** Prints the current movement count inside a white rectangle in the window
+/** Prints the current movement count inside a rectangle in the window
  */
 void	ft_print_movements(t_game *game)
 {

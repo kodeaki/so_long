@@ -70,20 +70,22 @@ $(NAME_BONUS):$(OBJS_BONUS) $(HEADER_BONUS)
 $(LIBFT):
 		make -C $(LIBFT_PATH) -s
 
-MAP_DIR = ./maps/valid/
-MAP ?= ok9
+MAP_DIR = ./maps/
+MAP ?= valid/ok9
 
-# Runs valgrind to check for memory leaks, uses suppression file to suppress known errors in minilibx
+# Runs valgrind to check for memory leaks, if default suppression isn't on, uses suppression file to suppress known errors in minilibx
+# Has option to run valgrind without suppressions to show the minilibx errors
 v: all supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME) $(MAP_DIR)$(MAP).ber
-# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME) $(MAP)
-		rm mlx.supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=mlx.supp ./$(NAME) $(MAP_DIR)$(MAP).ber
+# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --default-suppressions=no ./$(NAME) $(MAP_DIR)$(MAP).ber
+		@rm -rf mlx.supp
 
-# Runs valgrind to check for memory leaks in the bonus version, uses suppression file to suppress known errors in minilibx
+# Runs valgrind to check for memory leaks, if default suppression isn't on, uses suppression file to suppress known errors in minilibx
+# Has option to run valgrind without suppressions to show the minilibx errors
 vb: bonus supp
-		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=mlx.supp ./$(NAME_BONUS) $(MAP_DIR)$(MAP).ber
-# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./$(NAME_BONUS) $(MAP)
-		rm mlx.supp
+		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --suppressions=mlx.supp ./$(NAME_BONUS) $(MAP_DIR)$(MAP).ber
+# 		valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes --track-fds=yes --default-suppressions=no ./$(NAME_BONUS) $(MAP_DIR)$(MAP).ber
+		@rm -rf mlx.supp
 
 # Suppresses errors made in the minilibx library
 # writev_uninit_xcb :	is a name for the suppression, writev, uninit, and xcv describe the errors to suppress
@@ -101,6 +103,7 @@ clean:
 		@make clean -C $(LIBFT_PATH) -s
 		@rm -rf $(OBJ_DIR)
 		@rm -rf $(OBJ_DIR_BONUS)
+		@rm -rf mlx.supp
 		@echo "removed object files"
 
 fclean:
@@ -109,6 +112,7 @@ fclean:
 		@rm -rf $(OBJ_DIR_BONUS)
 		@rm -rf $(NAME)
 		@rm -rf $(NAME_BONUS)
+		@rm -rf mlx.supp
 		@echo "removed object files and executables"
 
 re:		fclean all
