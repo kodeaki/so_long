@@ -6,7 +6,7 @@
 /*   By: tpirinen <tpirinen@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/28 11:18:43 by tpirinen          #+#    #+#             */
-/*   Updated: 2025/09/01 15:55:10 by tpirinen         ###   ########.fr       */
+/*   Updated: 2025/09/07 13:16:23 by tpirinen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ static void	ft_check_is_map_enclosed(t_game *game);
  */
 void	ft_parse_map(t_game *game)
 {
-	ft_count_map_parameters(game);
-	ft_verify_map_parameter_count(game);
 	ft_check_is_map_rectangular(game);
 	ft_check_is_map_enclosed(game);
+	ft_count_map_parameters(game);
+	ft_verify_map_parameter_count(game);
 	ft_check_valid_path_to_win(game);
 }
 

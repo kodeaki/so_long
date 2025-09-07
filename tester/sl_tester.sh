@@ -29,7 +29,7 @@ check_error_map() {
 local map_file="$1"
 local EXPECTED_OUTPUT="$2"
 
-leaks --atExit -- ./so_long "$map_file" > /dev/null 2>&1
+leaks --atExit -- valgrind -q ./so_long "$map_file" > /dev/null 2>&1
 LEAKS=$?
 if [ $LEAKS -eq 1 ]; then
         printf "${RED}$C.[MKO] LEAKS ${DEF_COLOR}"
@@ -37,7 +37,7 @@ else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
 fi
 
-./so_long "$map_file" > test_check.txt
+valgrind -q ./so_long "$map_file" > test_check.txt
 
 SO_LONG_EXIT_CODE=$?
 
@@ -84,7 +84,7 @@ check_valid_map() {
 
 local map_file="$1"
 
-./so_long "$map_file" &
+valgrind -q ./so_long "$map_file" &
 
 PID=$!
 
@@ -96,6 +96,7 @@ CHECK_ERROR=$?
 
 if [ $CHECK_ERROR == 0 ]; then
 	# sleep 10
+	sleep 0.35
     kill $PID > /dev/null 2>&1
     printf "${GREEN}$C.[OK] ${DEF_COLOR}\n";
     
@@ -130,7 +131,7 @@ fi
 #En todos estos casos tu programa debera printar error y no ejecutar el juego. ↓
 
 
-leaks --atExit -- ./so_long > /dev/null 2>&1
+leaks --atExit -- valgrind -q ./so_long > /dev/null 2>&1
 LEAKS=$?
 if [ $LEAKS -eq 1 ]; then
         printf "${RED}$C.[MKO] LEAKS ${DEF_COLOR}"
@@ -138,7 +139,7 @@ else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
 fi
 
-./so_long > test_check.txt #1
+valgrind -q ./so_long > test_check.txt #1
 
 LINE=$(head -n 1 test_check.txt)
 LINE2=$(sed -n '2p' test_check.txt)
@@ -173,7 +174,7 @@ else
         printf "${GREEN}$C.[MOK]${DEF_COLOR}";
 fi
 
-./so_long invent.ber more argv > test_check.txt #2
+valgrind -q ./so_long invent.ber more argv > test_check.txt #2
 
 LINE=$(head -n 1 test_check.txt)
 LINE2=$(sed -n '2p' test_check.txt)
